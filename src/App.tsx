@@ -1,14 +1,14 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PokemonList from "./pages/PokemonList";
+import HomePokemon from "./pages/HomePokemon";
 
 const App: React.FC = () => {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<PokemonList />} />
+          <Route path="/" element={<HomePokemon />} />
         </Routes>
       </BrowserRouter>
     </>
