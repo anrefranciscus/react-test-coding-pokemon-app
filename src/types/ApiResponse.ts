@@ -16,11 +16,13 @@ export interface PokemonDetailResponse {
     front_default: string;
     [key: string]: string;
   };
-  types: Array<{
-    slot: number;
-    type: {
-      name: string;
-      url: string;
-    };
-  }>;
+  types: DetailType[]
+}
+
+interface DetailType {
+  slot: number;
+  type: {
+    name: string;
+    url: string;
+  }
 }

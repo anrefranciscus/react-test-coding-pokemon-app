@@ -1,8 +1,9 @@
-import styled from "styled-components";
 import React, { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getPokemonList } from "../services/PokeApi";
 import { ApiResponse } from "../types/ApiResponse";
+import { StyledContainer } from "./styled";
+import { Link } from "react-router-dom";
 const HomePokemon: React.FC = () => {
   const [pokemon, setPokemon] = useState<ApiResponse["results"]>([]);
   const [hasMore, setHasMore] = useState(true);
@@ -21,26 +22,24 @@ const HomePokemon: React.FC = () => {
   }, []);
   return (
     <StyledContainer>
-      <InfiniteScroll
-        dataLength={pokemon.length}
-        next={fetchMorePokemon}
-        hasMore={hasMore}
-        loader={<h4>Loading...</h4>}
-      >
-        {pokemon.map((p) => (
-          <div className="item" key={p.name}>{p.name}</div>
-        ))}
-      </InfiniteScroll>
+      <div className="container">
+        <InfiniteScroll
+          dataLength={pokemon.length}
+          next={fetchMorePokemon}
+          hasMore={hasMore}
+          loader={<h4>Loading...</h4>}
+        >
+          {pokemon.map((p) => (
+            <div className="item" key={p.name}>
+              <Link to={`/pokemon-detail/${p.name}`} className="item-content">
+                {p.name}
+              </Link>
+            </div>
+          ))}
+        </InfiniteScroll>
+      </div>
     </StyledContainer>
   );
 };
 
 export default HomePokemon;
-
-const StyledContainer = styled.div`
-  .item {
-    border: 1px solid #ccc;
-    margin: 10px 0;
-    padding: 10px;
-  }
-`;
